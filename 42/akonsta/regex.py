@@ -17,7 +17,7 @@ def split_on_multiple_chars():
        (hint check re.split docs for extra switches)'''
     logline = ('2017-11-03T01:00:02;challenge time,regex!.'
                'hope you join ... soon')
-    return re.split(r"[;,]|\.(?<!\.\.)", logline)
+    return re.split(r"[,:]|(?<!\.)\.(?!\.)", logline)
 
 
 def get_all_hashtags_and_links():
@@ -32,13 +32,13 @@ def match_first_paragraph():
     '''Use re.sub to extract the content of the first paragraph (excl tags)'''
     html = ('<p>pybites != greedy</p>'
             '<p>not the same can be said REgarding ...</p>')
-    return re.sub(r"<p>(.*?)</p>", html)[0]
+    return re.findall(r"<p>(.*?)</p>", html)[0]
 
 
 def find_double_words():
     '''Use re.search(regex, text).group() to find the double word'''
     text = 'Spain is so nice in the the spring'
-    return re.findall(r"\b(\w+)(\s\1\b)+", text)[0]
+    return re.findall(r"\b((\w+)(\s\2\b))", text)[0][0]
 
 
 def match_ip_v4_address(ip):
